@@ -1,20 +1,20 @@
-"""Metadados de documentação da API (exibidos no Swagger em /docs)."""
+"""Configurações de metadados da documentação Swagger (/docs)."""
 
-TITLE = "Loja de Games API"
+TITLE = "GameStore API"
 
 DESCRIPTION = """
-API para gerenciar o **catálogo de jogos** de uma loja de games, as
-**plataformas** disponíveis (PlayStation, Xbox, PC...) e as **avaliações**
-registradas pelos clientes.
+Serviço RESTful desenvolvido para o gerenciamento completo do inventário de uma
+loja de jogos eletrônicos, contemplando o controle de **plataformas**, o
+**catálogo de títulos** e o sistema de **avaliações** dos usuários.
 
-## Regras de negócio
-* Nome de plataforma é único.
-* Todo jogo pertence a uma plataforma existente (FK `plataforma_id`).
-* Preço do jogo deve ser maior que zero.
-* Toda avaliação pertence a um jogo existente (FK `jogo_id`).
-* A nota da avaliação deve estar entre **1 e 5**.
-* Não é possível excluir uma plataforma que ainda possui jogos.
-* Ao excluir um jogo, suas avaliações também são removidas.
+## Regras e Validações da Aplicação
+- **Unicidade:** Não são permitidas plataformas com nomes duplicados.
+- **Integridade de Jogos:** Todo título cadastrado exige vínculo com uma plataforma válida (`plataforma_id`).
+- **Precificação:** O valor comercial de um jogo deve ser estritamente superior a `0`.
+- **Integridade de Avaliações:** Cada review precisa estar associada a um jogo existente (`jogo_id`).
+- **Escala de Notas:** As pontuações atribuídas pelos clientes aceitam apenas valores inteiros de **1 a 5**.
+- **Restrição de Exclusão:** Plataformas com jogos ativos vinculados não podem ser removidas.
+- **Exclusão em Cascata:** A remoção de um jogo apaga automaticamente todas as avaliações ligadas a ele.
 """
 
 VERSION = "1.0.0"
@@ -22,18 +22,18 @@ VERSION = "1.0.0"
 TAGS_METADATA = [
     {
         "name": "Plataformas",
-        "description": "Cadastro e consulta das plataformas (PlayStation, Xbox, PC...).",
+        "description": "Operações de criação, listagem e gerenciamento de consoles e sistemas (PC, PS5, Xbox, etc.).",
     },
     {
         "name": "Jogos",
-        "description": "Catálogo de jogos. Cada jogo está vinculado a uma plataforma.",
+        "description": "Manutenção do acervo de jogos da loja e seus vínculos com as plataformas.",
     },
     {
         "name": "Avaliações",
-        "description": "Avaliações (nota de 1 a 5 e comentário) feitas pelos clientes para cada jogo.",
+        "description": "Gerenciamento de feedbacks, notas (1 a 5) e comentários enviados pelos clientes.",
     },
     {
         "name": "Raiz",
-        "description": "Verificação de status da API.",
+        "description": "Endpoint de health check e informações gerais da API.",
     },
 ]
